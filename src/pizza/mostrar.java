@@ -5,11 +5,22 @@
  */
 package pizza;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author herfr
  */
 public class mostrar extends javax.swing.JFrame {
+    String id, n, ape, ciu, dir;
+    public static String us = "", con = "";
+    private ResultSet rs;
+    public String url="jdbc:sqlserver://192.168.20.192\\SQLPROYECTOS:1433; databaseName=pizzeria";
 
     /**
      * Creates new form mostrar
@@ -38,22 +49,32 @@ public class mostrar extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "N. Cliente", "Sabor", "N. Rebanadas"
+                "Cve. Pedido", "Sabor", "N. Rebanadas", "Nombre del cliente", "Observaciones", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Mostrar pedidos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Fecha");
 
         jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,19 +83,19 @@ public class mostrar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel1)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,6 +114,59 @@ public class mostrar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Principal a = new Principal();
+        a.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conect = DriverManager.getConnection(url, us, con);
+            Statement st = conect.createStatement();
+            rs = st.executeQuery("SELECT * FROM dbo.pedidos");
+
+            DefaultListModel modelo = new DefaultListModel();
+            DefaultListModel modelo1 = new DefaultListModel();
+            DefaultListModel modelo2 = new DefaultListModel();
+            DefaultListModel modelo3 = new DefaultListModel();
+            DefaultListModel modelo4 = new DefaultListModel();
+            DefaultListModel modelo5 = new DefaultListModel();
+            while (rs.next()) {
+                
+//              JOptionPane.showMessageDialog(null, "\n Los clientes son: " + rs.getString("Nombre"));
+                modelo.addElement(rs.getString("Cvepedido"));
+//              JOptionPane.showMessageDialog(null, "\n La clave del cliente es: " + rs.getString("CveCliente"));
+                modelo1.addElement(rs.getString("Sabor"));
+                modelo2.addElement(rs.getString("Rebanadas"));
+                modelo3.addElement(rs.getString("Nombre"));
+                modelo4.addElement(rs.getString("Observaciones"));
+                modelo5.addElement(rs.getString("Fecha"));
+            }
+            int b=modelo.getSize();
+            String matris[][]=new String[b][6];
+            for (int i = 0; i < b; i++) {
+                matris[i][0]=(String) modelo.get(i);
+                matris[i][1]=(String) modelo1.get(i);
+                matris[i][2]=(String) modelo2.get(i);
+                matris[i][3]=(String) modelo3.get(i);
+                matris[i][4]=(String) modelo4.get(i);
+                matris[i][5]=(String) modelo5.get(i);
+            }
+            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                    matris,
+            new String [] {
+                "Cvepedido", "Sabor", "Rebandas", "Nombre", "Obvservaciones", "Fecha y hora"
+            }
+            ));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +202,15 @@ public class mostrar extends javax.swing.JFrame {
             }
         });
     }
+
+    public static void setUs(String us) {
+        mostrar.us = us;
+    }
+
+    public static void setCon(String con) {
+        mostrar.con = con;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

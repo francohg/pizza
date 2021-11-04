@@ -28,15 +28,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Mex" min="-2" max="-2" attributes="0"/>
+                          <Component id="Haw" min="-2" max="-2" attributes="0"/>
+                          <Component id="Pep" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton5" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton6" min="-2" max="-2" attributes="0"/>
+                          <Component id="Ranch" min="-2" max="-2" attributes="0"/>
+                          <Component id="Pas" min="-2" max="-2" attributes="0"/>
+                          <Component id="Champ" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -99,18 +99,18 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Haw" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Ranch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Pep" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Pas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Mex" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Champ" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -140,35 +140,35 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="Haw">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hawaiana"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HawActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="Pep">
       <Properties>
         <Property name="text" type="java.lang.String" value="Peperoni"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+    <Component class="javax.swing.JRadioButton" name="Mex">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mexicana"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+    <Component class="javax.swing.JRadioButton" name="Ranch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ranchera"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton5">
+    <Component class="javax.swing.JRadioButton" name="Pas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pastor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton6">
+    <Component class="javax.swing.JRadioButton" name="Champ">
       <Properties>
         <Property name="text" type="java.lang.String" value="Champi&#xf1;on"/>
       </Properties>
@@ -226,6 +226,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Regresar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>

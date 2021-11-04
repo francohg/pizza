@@ -8,6 +8,8 @@ package pizza;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,12 +17,16 @@ import java.sql.Statement;
  */
 public class Pedidos extends javax.swing.JFrame {
     String sab, nam, nr,ob,pre;
+    public static String us = "", con = "";
+    public String url="jdbc:sqlserver://192.168.20.192\\SQLPROYECTOS:1433; databaseName=pizzeria";
+    P_Inicio o = new P_Inicio();
     /**
      * Creates new form Pedidos
      */
     public Pedidos() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,12 +37,12 @@ public class Pedidos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        Haw = new javax.swing.JRadioButton();
+        Pep = new javax.swing.JRadioButton();
+        Mex = new javax.swing.JRadioButton();
+        Ranch = new javax.swing.JRadioButton();
+        Pas = new javax.swing.JRadioButton();
+        Champ = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -53,22 +59,22 @@ public class Pedidos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jRadioButton1.setText("Hawaiana");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        Haw.setText("Hawaiana");
+        Haw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                HawActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Peperoni");
+        Pep.setText("Peperoni");
 
-        jRadioButton3.setText("Mexicana");
+        Mex.setText("Mexicana");
 
-        jRadioButton4.setText("Ranchera");
+        Ranch.setText("Ranchera");
 
-        jRadioButton5.setText("Pastor");
+        Pas.setText("Pastor");
 
-        jRadioButton6.setText("Champiñon");
+        Champ.setText("Champiñon");
 
         jLabel1.setText("Sabor de la pizza");
 
@@ -96,6 +102,11 @@ public class Pedidos extends javax.swing.JFrame {
         });
 
         jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Maximo 4 sabores");
 
@@ -108,14 +119,14 @@ public class Pedidos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(Mex)
+                            .addComponent(Haw)
+                            .addComponent(Pep, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton5)
-                            .addComponent(jRadioButton6)))
+                            .addComponent(Ranch)
+                            .addComponent(Pas)
+                            .addComponent(Champ)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,16 +172,16 @@ public class Pedidos extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton4))
+                    .addComponent(Haw)
+                    .addComponent(Ranch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton5))
+                    .addComponent(Pep)
+                    .addComponent(Pas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton6))
+                    .addComponent(Mex)
+                    .addComponent(Champ))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -195,40 +206,85 @@ public class Pedidos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void HawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HawActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
+    }//GEN-LAST:event_HawActionPerformed
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        try {
-//                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//                    Connection conect = DriverManager.getConnection(prin.url, us, con);
-//                    conect.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-//                    Statement st = conect.createStatement();
-//                    st.execute("  use Veterinaria\n"
-//                                    + "IF OBJECT_ID ('dbo.indexclientes ','U')IS NOT NULL  \n" +
-//                                    "   DROP TABLE dbo.indexclientes;" +
-//                                    "   create table dbo.indexclientes\n" +
-//                                    "(\n" +
-//                                    "   PersonCl int IDENTITY (1,1), \n" +
-//                                    "   CveCliente int \n" +
-//                                    ")\n" +
-//                                    " insert into.dbo.indexclientes(CveCliente)\n" +
-//                                    " select CveCliente\n" +
-//                                    " from dbo.Clientes");
-//                    st.execute("INSERT INTO dbo.MonitoreoC(Usuario, Fecha,Hora,Modificacion)\n" +
-//                        "  VALUES ('"+us+"',GETDATE(),GETDATE(),'Inserción del usuario "+id+" con el nombre "+n+"');");
-//                    
-//                    } catch (Exception e) {
-//
-//                    }
+        sab=gs();
+        rg();
+        try {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Connection conect = DriverManager.getConnection(url, us, con);
+                    conect.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+                    Statement st = conect.createStatement();
+                    st.execute("INSERT INTO dbo.pedidos(Sabor, Nombre, Rebanadas, Observaciones, Precio, Fecha)\n" +
+                        "  VALUES ('"+sab+"','"+nam+"',"+nr+",'"+ob+"',"+pre+",GETDATE());");
+                    JOptionPane.showMessageDialog(null, "Creado");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error "+e);
+                    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Principal a = new Principal();
+        a.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public String gs() {
+        String b="";
+        ArrayList<String> n = new ArrayList<String>();
+        String s="";
+        if (Haw.isSelected()) {
+            s="Hawaina";
+            n.add(s);
+        }
+        if (Pep.isSelected()) {
+            s=" Peperoni";
+            n.add(s);
+        }
+        if (Mex.isSelected()) {
+            s=" Mexicana";
+            n.add(s);
+        }
+
+        if (Ranch.isSelected()) {
+            s=" Ranchera";
+            n.add(s);
+        }
+        if (Pas.isSelected()) {
+            s=" Pastor";
+            n.add(s);
+        }
+        if (Champ.isSelected()) {
+            s=" Champiñon";
+            n.add(s);
+        }
+        for (int i = 0; i < (n.size()-1); i++) {
+            b=n.get(i);
+            n.remove(i);
+            n.add(i, b);
+        }
+        b=n.toString();
+        return b;
+    }
+    public void rg(){
+        nam=jTextField1.getText();
+        nr=jTextField2.getText();
+        ob=jTextField3.getText();
+        pre=jTextField4.getText();
+    }
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -264,7 +320,25 @@ public class Pedidos extends javax.swing.JFrame {
         });
     }
 
+    public static void setUs(String us) {
+        Pedidos.us = us;
+    }
+
+    public static void setCon(String con) {
+        Pedidos.con = con;
+    }
+
+    
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Champ;
+    private javax.swing.JRadioButton Haw;
+    private javax.swing.JRadioButton Mex;
+    private javax.swing.JRadioButton Pas;
+    private javax.swing.JRadioButton Pep;
+    private javax.swing.JRadioButton Ranch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -274,12 +348,6 @@ public class Pedidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

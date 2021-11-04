@@ -110,6 +110,9 @@ public class P_Inicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Pedidos ab = new Pedidos();
+        registrarmercancia gi = new registrarmercancia();
+        mostrar mo = new mostrar();
         this.user = usua.getText();
         this.pass = contra.getText();
         try {
@@ -119,11 +122,17 @@ public class P_Inicio extends javax.swing.JFrame {
                 conect.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
                 JOptionPane.showMessageDialog(null, "Conectado");
                 o.setVisible(true);
+                ab.setUs(usua.getText());
+                ab.setCon(contra.getText());
+                gi.setUs(usua.getText());
+                gi.setCon(contra.getText());
+                mo.setUs(usua.getText());
+                mo.setCon(contra.getText());
                 dispose();
             } catch (SQLException ex) {
-                System.out.println("Error.");
                 JOptionPane.showMessageDialog(null, "\n Error "+ex);
             } catch (ClassNotFoundException ex) { 
+                JOptionPane.showMessageDialog(null, "\n Error1 "+ex);
             Logger.getLogger(P_Inicio.class.getName()).log(Level.SEVERE, null, ex);
         } 
             

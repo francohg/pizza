@@ -5,11 +5,21 @@
  */
 package pizza;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import static pizza.Pedidos.con;
+import static pizza.Pedidos.us;
+
 /**
  *
  * @author herfr
  */
 public class registrarmercancia extends javax.swing.JFrame {
+    String tip,cant,pre,marc;
+    public static String us = "", con = "";
+    public String url="jdbc:sqlserver://192.168.20.192\\SQLPROYECTOS:1433; databaseName=pizzeria";
 
     /**
      * Creates new form registrarmercancia
@@ -55,8 +65,18 @@ public class registrarmercancia extends javax.swing.JFrame {
         jLabel4.setText("Precio");
 
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,6 +141,35 @@ public class registrarmercancia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Principal a = new Principal();
+        a.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+     public void rg(){
+        tip=jTextField1.getText();
+        cant=jTextField2.getText();
+        marc=jTextField3.getText();
+        pre=jTextField4.getText();
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        rg();
+        try {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Connection conect = DriverManager.getConnection(url, us, con);
+                    conect.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+                    Statement st = conect.createStatement();
+                    st.execute("INSERT INTO dbo.mercancia(Tipo, Cantidad, Precio, Fecha, marca)\n" +
+                        "  VALUES ('"+tip+"',"+cant+","+pre+",GETDATE(),'"+marc+"');");
+                    JOptionPane.showMessageDialog(null, "Creado");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error "+e);
+                    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -155,6 +204,15 @@ public class registrarmercancia extends javax.swing.JFrame {
             }
         });
     }
+
+    public static void setUs(String us) {
+        registrarmercancia.us = us;
+    }
+
+    public static void setCon(String con) {
+        registrarmercancia.con = con;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
