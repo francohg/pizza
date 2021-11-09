@@ -113,6 +113,7 @@ public class P_Inicio extends javax.swing.JFrame {
         Pedidos ab = new Pedidos();
         registrarmercancia gi = new registrarmercancia();
         mostrar mo = new mostrar();
+        Mmerca moo = new Mmerca();
         this.user = usua.getText();
         this.pass = contra.getText();
         try {
@@ -120,7 +121,6 @@ public class P_Inicio extends javax.swing.JFrame {
 //                url = "jdbc:sqlserver://LAPTOP-LB382DMD\\SQLEXPRESS:49419;databaseName=" + db + ";user=" + user + ";pasword=" + pass + ";integratedSecurity=true;"
                 Connection conect = DriverManager.getConnection(url, user, pass);
                 conect.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-                JOptionPane.showMessageDialog(null, "Conectado");
                 o.setVisible(true);
                 ab.setUs(usua.getText());
                 ab.setCon(contra.getText());
@@ -128,6 +128,10 @@ public class P_Inicio extends javax.swing.JFrame {
                 gi.setCon(contra.getText());
                 mo.setUs(usua.getText());
                 mo.setCon(contra.getText());
+                moo.setUs(usua.getText());
+                moo.setCon(contra.getText());
+                o.setUs(usua.getText());
+                o.setCon(contra.getText());
                 dispose();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "\n Error "+ex);

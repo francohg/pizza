@@ -223,8 +223,8 @@ public class Pedidos extends javax.swing.JFrame {
                     Connection conect = DriverManager.getConnection(url, us, con);
                     conect.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
                     Statement st = conect.createStatement();
-                    st.execute("INSERT INTO dbo.pedidos(Sabor, Nombre, Rebanadas, Observaciones, Precio, Fecha)\n" +
-                        "  VALUES ('"+sab+"','"+nam+"',"+nr+",'"+ob+"',"+pre+",GETDATE());");
+                    st.execute("INSERT INTO dbo.pedidos(Sabor, Nombre, Rebanadas, Observaciones, Precio, Fecha,Hora)\n" +
+                        "  VALUES ('"+sab+"','"+nam+"',"+nr+",'"+ob+"',"+pre+",GETDATE(),GETDATE());");
                     JOptionPane.showMessageDialog(null, "Creado");
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Error "+e);

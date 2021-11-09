@@ -5,17 +5,31 @@
  */
 package pizza;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.LocalDate;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author herfr
  */
 public class Principal extends javax.swing.JFrame {
-
+    String id, n, ape, ciu, dir,fec;
+    double total=0;
+    LocalDate todaysDate = LocalDate.now();
+    public static String us = "", con = "";
+    private ResultSet rs;
+    public String url="jdbc:sqlserver://192.168.20.192\\SQLPROYECTOS:1433; databaseName=pizzeria";
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        total=0;
     }
 
     /**
@@ -32,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +85,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Mostrar mercancia");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,10 +109,9 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(9, 9, 9)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton4)
-                                    .addComponent(jButton3)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jButton5)))
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton5)
+                                    .addComponent(jButton6))))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,9 +125,11 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jButton6)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -142,8 +165,36 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        total=0;
+        corte();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Mmerca o=new Mmerca();
+        o.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    public void corte(){
+        LocalDate date = LocalDate.now();
+        fec=date.toString();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conect = DriverManager.getConnection(url, us, con);
+            Statement st = conect.createStatement();
+            rs = st.executeQuery("use pizzeria\n" +
+                                 "select Precio from dbo.pedidos where Fecha='"+fec+"';");
+            String cadena="";
+            while (rs.next()) {
+                cadena=(rs.getString("Precio"));
+                total+=Double.parseDouble(cadena);
+            }
+            JOptionPane.showMessageDialog(null, "\n El total del corte es : " + total);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "\n Error : " + e);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -177,6 +228,15 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
+        
+    }
+
+    public static void setUs(String us) {
+        Principal.us = us;
+    }
+
+    public static void setCon(String con) {
+        Principal.con = con;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,5 +245,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     // End of variables declaration//GEN-END:variables
 }
